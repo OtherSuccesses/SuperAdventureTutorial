@@ -1,0 +1,9 @@
+C:\Users\vrthr\source\repos\SuperAdventureTutorial\Engine\bin\Debug\netstandard2.0\Engine.deps.json
+C:\Users\vrthr\source\repos\SuperAdventureTutorial\Engine\bin\Debug\netstandard2.0\Engine.dll
+C:\Users\vrthr\source\repos\SuperAdventureTutorial\Engine\bin\Debug\netstandard2.0\Engine.pdb
+C:\Users\vrthr\source\repos\SuperAdventureTutorial\Engine\obj\Debug\netstandard2.0\Engine.csprojResolveAssemblyReference.cache
+C:\Users\vrthr\source\repos\SuperAdventureTutorial\Engine\obj\Debug\netstandard2.0\Engine.csproj.CoreCompileInputs.cache
+C:\Users\vrthr\source\repos\SuperAdventureTutorial\Engine\obj\Debug\netstandard2.0\Engine.AssemblyInfoInputs.cache
+C:\Users\vrthr\source\repos\SuperAdventureTutorial\Engine\obj\Debug\netstandard2.0\Engine.AssemblyInfo.cs
+C:\Users\vrthr\source\repos\SuperAdventureTutorial\Engine\obj\Debug\netstandard2.0\Engine.dll
+C:\Users\vrthr\source\repos\SuperAdventureTutorial\Engine\obj\Debug\netstandard2.0\Engine.pdb
