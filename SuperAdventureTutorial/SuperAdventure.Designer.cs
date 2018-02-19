@@ -116,36 +116,42 @@
             resources.ApplyResources(this.btnUseWeapon, "btnUseWeapon");
             this.btnUseWeapon.Name = "btnUseWeapon";
             this.btnUseWeapon.UseVisualStyleBackColor = true;
+            this.btnUseWeapon.Click += new System.EventHandler(this.btnUseWeapon_Click);
             // 
             // btnUsePotion
             // 
             resources.ApplyResources(this.btnUsePotion, "btnUsePotion");
             this.btnUsePotion.Name = "btnUsePotion";
             this.btnUsePotion.UseVisualStyleBackColor = true;
+            this.btnUsePotion.Click += new System.EventHandler(this.btnUsePotion_Click);
             // 
             // btnNorth
             // 
             resources.ApplyResources(this.btnNorth, "btnNorth");
             this.btnNorth.Name = "btnNorth";
             this.btnNorth.UseVisualStyleBackColor = true;
+            this.btnNorth.Click += new System.EventHandler(this.btnNorth_Click);
             // 
             // btnEast
             // 
             resources.ApplyResources(this.btnEast, "btnEast");
             this.btnEast.Name = "btnEast";
             this.btnEast.UseVisualStyleBackColor = true;
+            this.btnEast.Click += new System.EventHandler(this.btnEast_Click);
             // 
             // btnSouth
             // 
             resources.ApplyResources(this.btnSouth, "btnSouth");
             this.btnSouth.Name = "btnSouth";
             this.btnSouth.UseVisualStyleBackColor = true;
+            this.btnSouth.Click += new System.EventHandler(this.btnSouth_Click);
             // 
             // btnWest
             // 
             resources.ApplyResources(this.btnWest, "btnWest");
             this.btnWest.Name = "btnWest";
             this.btnWest.UseVisualStyleBackColor = true;
+            this.btnWest.Click += new System.EventHandler(this.btnWest_Click);
             // 
             // rtbLocation
             // 
