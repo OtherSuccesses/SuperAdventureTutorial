@@ -59,26 +59,13 @@ namespace SuperAdventureTutorial
         //Function to control arbitrary movement
         private void MoveTo(Location newLocation)
         {
-            if (newLocation.ItemRequiredToEnter != null)
+            if(!_player.hasRequiredItemToEnterThisLocation(newLocation))
             {
-                bool playerHasRequiredItems = false;
-
-                forEach(InventoryItem ii in _player.Inventory)
-                {
-                    if (ii.Details.ID == newLocation.ItemRequiredToEnter.ID)
-                    {
-                        playerHasRequiredItems = true;
-                        break;
-                    }
-                }
-
-                if (!playerHasRequiredItems)
-                {
-                    rtbMessage.Text = "You must have a " + newLocation.ItemRequiredToEnter + " to enter this area. Please " +
+                rtbMessage.Text = "You must have a " + newLocation.ItemRequiredToEnter + " to enter this area. Please " +
                         "return when you've found one." + Environment.NewLine;
-                    return;
-                }
+                return;
             }
+            
 
             //If the required item is in Inventory, that is sufficient for travel 
             _player.CurrentLocation = newLocation;
@@ -98,54 +85,16 @@ namespace SuperAdventureTutorial
 
             if (newLocation.QuestAvailableHere != null)
             {
-                bool playerAlreadyHasQuest = false;
-                bool playerCompletedQuest = false;
-
-                foreach (PlayerQuest playerQuest in _player.Quests)
-                {
-                    if(playerQuest.Details.ID == newLocation.QuestAvailableHere.ID)
-                    {
-                        playerAlreadyHasQuest = true;
-
-                        if (playerQuest.IsCompleted)
-                        {
-                            playerCompletedQuest = true;
-                        }
-                    }
-                }
+                bool playerAlreadyHasQuest = _player.HasThisQuest(newLocation.QuestAvailableHere);
+                bool playerCompletedQuest = _player.CompletedThisQuest(newLocation.QuestAvailableHere);
 
                 //If the player has the quest in their log...
                 if (playerAlreadyHasQuest)
                 {
                     if (!playerCompletedQuest)
                     {
-                        bool playerHasAllItemsToCompleteQuest = true;
-
-                        foreach(QuestCompletionItem qci in newLocation.QuestAvailableHere.QuestCompletionItems)
-                        {
-                            bool foundItemInPlayersInventory = false;
-
-                            foreach (InventoryItem ii in _player.Inventory)
-                            {
-                                if (ii.Details.ID == qci.Details.ID)
-                                {
-                                    foundItemInPlayersInventory = true;
-                                    if (ii.Quantity < qci.Quantity)
-                                    {
-                                        playerHasAllItemsToCompleteQuest = false;
-                                        break;
-                                    }
-                                    //This break is to stop the look in inventory once item is found
-                                    break;
-                                }
-                            }
-                            if (!foundItemInPlayersInventory)
-                            {
-                                playerHasAllItemsToCompleteQuest = false;
-                                //Plenty o' breaks to prevent excess loopage
-                                break;
-                            }
-                        }
+                        bool playerHasAllItemsToCompleteQuest = _player.HasAllQuestCompletionItems(newLocation.QuestAvailableHere);
+                    
                         //If player has sufficient items, run all this business
                         if (playerHasAllItemsToCompleteQuest)
                         {
@@ -154,17 +103,7 @@ namespace SuperAdventureTutorial
                             rtbMessage.Text += "You have completed the " + newLocation.QuestAvailableHere.Name +
                                 " quest!" + Environment.NewLine;
 
-                            foreach(QuestCompletionItem qci in newLocation.QuestAvailableHere.QuestCompletionItems)
-                            {
-                                foreach(InventoryItem ii in _player.Inventory)
-                                {
-                                    if(ii.Details.ID == qci.Details.ID)
-                                    {
-                                        ii.Quantity -= qci.Quantity;
-                                        break;
-                                    }
-                                }
-                            }
+                            _player.RemoveQuestCompletionItems(newLocation.QuestAvailableHere);
 
                             rtbMessage.Text += "You receive: " + Environment.NewLine;
                             rtbMessage.Text += newLocation.QuestAvailableHere.RewardExperiencePoints.ToString() +
@@ -182,7 +121,7 @@ namespace SuperAdventureTutorial
                             foreach(InventoryItem ii in _player.Inventory)
                             {
                                 //If the item already exists in the players inventory it adds one, woohoo.
-                                if (ii.Details.ID = newLocation.QuestAvailableHere.RewardItem.ID)
+                                if (ii.Details.ID == newLocation.QuestAvailableHere.RewardItem.ID)
                                 {
                                     ii.Quantity++;
                                     addedItemToPlayerInventory = true;
